@@ -88,8 +88,94 @@ const data = [
   }
 ];
 
-/* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
+/* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: */
+let body = document.querySelector('body');
+let header = document.querySelector('.header');
+let articles = document.querySelector('.articles');
 
+
+// articles.appendChild(articleMaker);
+// articleMaker.classList.add('article');
+// articleMaker.prepend(articleMakerH2);
+// articleMaker.appendChild(articleMakerP);
+// articleMaker.appendChild(articleMakerSpan);
+
+
+
+function articleMaker(arr){
+    let articleDiv = document.createElement('div');
+    articleDiv.classList.add('article');
+
+    let articleTitle = document.createElement('h2');
+    articleTitle.textContent = arr.title;
+    articleDiv.appendChild(articleTitle);
+
+    let articleDate = document.createElement('p');
+    articleDate.classList.add('date');
+    articleDate.textContent = arr.date;
+    articleDiv.appendChild(articleDate);
+
+    let articlePara1 = document.createElement('p');
+    articlePara1.textContent = arr.firstParagraph;
+    articleDiv.appendChild(articlePara1);
+
+    let articlePara2 = document.createElement('p');
+    articlePara2.textContent = arr.secondParagraph;
+    articleDiv.appendChild(articlePara2);
+
+    let articlePara3 = document.createElement('p');
+    articlePara3.textContent = arr.thirdParagraph;
+    articleDiv.appendChild(articlePara3);
+
+    let articleSpan = document.createElement('span');
+    articleSpan.textContent = 'Open';
+    articleSpan.classList.add('expandButton');
+    articleDiv.appendChild(articleSpan);
+
+    // articleTitle.textContent = arr.map(x => x.title);
+    // articleDate.textContent = arr.map(x => x.date);
+    // articlePara1.textContent = arr.map(x => x.firstParagraph);
+    // articlePara2.textContent = arr.map(x => x.secondParagraph);
+    // articlePara3.textContent = arr.map(x => x.thirdParagraph);
+    articleSpan.addEventListener('click', (event) => {
+      articleDiv.classList.toggle('article-open');
+      if (event.target.textContent === 'Open'){
+        event.target.textContent = 'Close';
+      }
+      else{
+        event.target.textContent = 'Open';
+      }
+    })
+
+    return articleDiv;
+}
+
+// newArt = {title: 'Hello', date: '05/15/2020', firstParagraph:'hello hello hello', secondParagraph: 'hello hello hello', thirdParagraph: 'hello hello hello'},
+// data.push(newArt);
+
+// data.forEach((item) => {
+//   articles.appendChild(articleMaker(item));
+//   return articles
+// });
+
+// console.log(newArticle);
+
+newArt = {title: 'Hello', date: '05/15/2020', firstParagraph:'hello hello hello', secondParagraph: 'hello hello hello', thirdParagraph: 'hello hello hello'},
+data.push(newArt);
+data.forEach((item) => {
+  articles.appendChild(articleMaker(item));
+  return articles
+});
+
+// data.forEach(item => {
+//   articles.appendChild(item)
+// })
+
+// let newArticle = data.map((item) => {
+//   articles.appendChild(articleMaker(item));
+// });
+
+/*
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -101,8 +187,11 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as its one argument, or 5 separate arguments mapping to each piece of the data object above.
+  Your function should take either an object as its one argument, or 5 separate arguments mapping to each piece of the data object above.*/
 
+
+
+  /*
   Step 2: Add an event listener to the expandButton span. This listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: Don't forget to return something from your function!
